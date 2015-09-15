@@ -24,7 +24,6 @@ namespace AngularJSAuthentication.API.Providers
             {
                 context.TryGetFormCredentials(out clientId, out clientSecret);
             }
-
             if (context.ClientId == null)
             {
                 //Remove the comments from the below line context.SetError, and invalidate context 
@@ -33,7 +32,7 @@ namespace AngularJSAuthentication.API.Providers
                 //context.SetError("invalid_clientId", "ClientId should be sent.");
                 return Task.FromResult<object>(null);
             }
-
+            
             using (AuthRepository _repo = new AuthRepository())
             {
                 client = _repo.FindClient(context.ClientId);
@@ -44,7 +43,7 @@ namespace AngularJSAuthentication.API.Providers
                 context.SetError("invalid_clientId", string.Format("Client '{0}' is not registered in the system.", context.ClientId));
                 return Task.FromResult<object>(null);
             }
-
+           
             if (client.ApplicationType == Models.ApplicationTypes.NativeConfidential)
             {
                 if (string.IsNullOrWhiteSpace(clientSecret))
@@ -61,7 +60,7 @@ namespace AngularJSAuthentication.API.Providers
                     }
                 }
             }
-
+            
             if (!client.Active)
             {
                 context.SetError("invalid_clientId", "Client is inactive.");

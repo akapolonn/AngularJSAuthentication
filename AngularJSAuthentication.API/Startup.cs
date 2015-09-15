@@ -44,7 +44,7 @@ namespace AngularJSAuthentication.API
             
                 AllowInsecureHttp = true,
                 TokenEndpointPath = new PathString("/token"),
-                AccessTokenExpireTimeSpan = TimeSpan.FromSeconds(120),
+                AccessTokenExpireTimeSpan = TimeSpan.FromSeconds(60),
                 Provider = new SimpleAuthorizationServerProvider(),
                 RefreshTokenProvider = new SimpleRefreshTokenProvider()
             };
